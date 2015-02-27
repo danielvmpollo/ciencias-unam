@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>    	
+    </h:head>
+    <h:body>	
+        <h4>#{saludoController.saludoMundial}</h4>
+        
+        
+        
+        <h4>#{saludoController.fecha}</h4>
+        
+        <br/>
+        <br/>
+        <h:form>
+            ingresa tu nombre:
+            <p:inputText value="#{saludoController.nombre}" id="nombre" validatorMessage="Formato no valido">
+                <f:validateRegex for="nombre" pattern="[a-zA-Z0-9._%+-]*@[A-Z0-9.-]*\.[A-Z]{0,4}" />
+            </p:inputText>
+            
+            <p:message for="nombre"/>
+            <p:commandButton value="Ver valor"  update=":mensaje @form" actionListener="#{saludoController.cambiaNombre()}"  />
+        </h:form>
+        
+        
+        <h:form id="mensaje">
+            <p:outputLabel value="Hola #{saludoController.nombre}"/>
+            
+            <br/>
+            <p:dataTable value="#{saludoController.nombres}" var="_nombre">
+                <p:column>#{_nombre}</p:column>
+            </p:dataTable>
+            
+        </h:form>
+    </h:body>
+</html>
