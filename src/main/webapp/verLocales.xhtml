@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+        
+   <ui:composition template="/template/template.xhtml" >
+          
+        
+        
+    
+    
+        <ui:define name="content">
+            
+            <script type="text/javascript" 
+                src="http://maps.googleapis.com/maps/api/js"
+                />
+       
+            
+            <h4>Ver local</h4>
+            
+            
+                 <p:gmap id="gmap" center="19.3142052,-99.1835216" zoom="13" 
+                        type="HYBRID" 
+                        style="width:600px;height:400px"
+                        onPointClick="agregaMarcador(event);"
+                        widgetVar="map"
+                        disableDoubleClickZoom="true"  
+                        model="#{localController.simpleModel}"
+                        >
+                     
+                </p:gmap>
+              
+
+           
+        </ui:define>
+ 
+    </ui:composition>
+</html>

@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import mx.unam.ciencias.model.Local;
+import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -55,6 +56,7 @@ public class LocalController {
          this.local.setLongitud(latlng.getLng());
          
     }
+    
 
     /***getter y setter
      * @return  **/
