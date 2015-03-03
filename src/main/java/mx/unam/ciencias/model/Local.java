@@ -16,7 +16,7 @@ public class Local {
     
     private String nombre;
     
-     private List<String> categoria;
+     private String categoria;
     
     private Double latitud;
     
@@ -34,11 +34,11 @@ public class Local {
         this.nombre = nombre;
     }
 
-    public List<String> getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(List<String> categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 

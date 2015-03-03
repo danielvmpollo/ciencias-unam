@@ -36,6 +36,7 @@ public class LocalController {
     
     public void guardarLocal(){
         this.locales.add(local);
+        this.local=new Local();
     }
     
     public void seleccion(PointSelectEvent event){
@@ -45,7 +46,8 @@ public class LocalController {
          
     }
 
-    /***getter y setter **/
+    /***getter y setter
+     * @return  **/
     
     public List<Local> getLocales() {
         return locales;

@@ -4,10 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:composition template="/template/template.xhtml" >
-        <ui:define name="content">	
-        <h4>Hola #{saludoController.nombre}</h4>
-        </ui:define>
-    </ui:composition>
+
+    <body>
+
+        <ui:composition template="template/template.xhtml">
+
+            <ui:define name="top">
+                Header
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
 </html>

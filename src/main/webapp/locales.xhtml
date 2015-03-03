@@ -4,9 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>  
-        <script type="text/javascript" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+        
+   <ui:composition template="/template/template.xhtml" >
+          
+        
+        
+    
+    
+        <ui:define name="content">
+            
+            <script type="text/javascript" 
                 src="http://maps.googleapis.com/maps/api/js"
                 />
         <script type="text/javascript"> 
@@ -27,41 +37,68 @@
                     PF('map').addOverlay(marker);
             };
         </script>
-        
-    </h:head>
-    <h:body>	
-    	<h4>Alta local</h4>
-        
-        <h:form id="form">
-            <p:outputLabel value="Nombre local" />
-            <p:inputText id="nombre" value="#{localController.local.nombre}" required="true" />
-            <p:message for="nombre" />
-            <br/>
-            <p:outputLabel value="Categoria" />
-            <p:inputText id="categoria" value="#{localController.local.categoria}" required="true" />
-            <p:message for="categoria" />
-            <br/>
-            <p:outputLabel value="Ubicacion" />
-             <p:gmap id="gmap" center="19.3142052,-99.1835216" zoom="13" 
-                    type="HYBRID" 
-                    style="width:600px;height:400px"
-                    onPointClick="agregaMarcador(event);"
-                    widgetVar="map"
-                    disableDoubleClickZoom="true"      
-                    >
+            
+            <h4>Alta local</h4>
+            
+            <h:form id="form">
+               <h:panelGrid id="local" columns="3">
+                    <p:outputLabel value="Nombre local" />
+                    <p:inputText id="nombre" value="#{localController.local.nombre}" required="true" />
+                    <p:message for="nombre" />
+
+                    <p:outputLabel value="Categoria" />
+                    <p:inputText id="categoria" value="#{localController.local.categoria}" required="true" />
+                    <p:message for="categoria" />
+               </h:panelGrid>
+                <p:outputLabel value="Ubicacion" />
+                 <p:gmap id="gmap" center="19.3142052,-99.1835216" zoom="13" 
+                        type="HYBRID" 
+                        style="width:600px;height:400px"
+                        onPointClick="agregaMarcador(event);"
+                        widgetVar="map"
+                        disableDoubleClickZoom="true"      
+                        >
+                     <p:ajax event="pointSelect" listener="#{localController.seleccion}"  update=":form:cords"   />
+                </p:gmap>
+                <br/>
+                <h:panelGrid id="cords" columns="3">
+                    <p:outputLabel value="Latitud:" />
+                    <p:inputText id="lati" value=" #{localController.local.latitud}" disabled="true" />
+                    <p:message for="lati" />
                     
-                    
-                 <p:ajax event="pointSelect" listener="#{localController.seleccion}"  update=":form:cords"   />
-            </p:gmap>
-            <h:panelGrid id="cords">
-                <p:outputLabel value="Latitud: #{localController.local.latitud}" />
-                <p:outputLabel value="Longitud: #{localController.local.longitud}" />
+                    <p:outputLabel value="Longitud:" />
+                    <p:inputText id="long" value="#{localController.local.longitud}" disabled="true"  />
+                    <p:message for="long" />
                 </h:panelGrid>
-            <br/>
-            <p:commandButton 
-                actionListener="#{localController.guardarLocal()}" 
-                             value="Guardar" />
-        </h:form>
-        
-    </h:body>
+                <br/>
+                <p:commandButton ajax="false"   
+                     actionListener="#{localController.guardarLocal()}" 
+                    value="Guardar" update=":locales @form" />
+
+            </h:form>
+
+
+            <h:form id="locales">
+            <p:dataTable  value="#{localController.locales}" 
+                          var="_local" >
+                <p:column>
+                    #{_local.nombre}
+                </p:column>
+                  <p:column>
+                    #{_local.categoria}
+                </p:column>
+
+                 <p:column>
+                    #{_local.latitud}
+                </p:column>
+
+                 <p:column>
+                    #{_local.longitud}
+                </p:column>
+
+            </p:dataTable>
+            </h:form>
+        </ui:define>
+ 
+    </ui:composition>
 </html>

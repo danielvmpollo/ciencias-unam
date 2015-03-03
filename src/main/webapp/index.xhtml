@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>    	
-    </h:head>
-    <h:body>	
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template/template.xhtml" >
+        <ui:define name="content">
         <h4>#{saludoController.saludoMundial}</h4>
         
         
@@ -19,7 +19,7 @@
         <h:form>
             ingresa tu nombre:
             <p:inputText value="#{saludoController.nombre}" id="nombre" validatorMessage="Formato no valido">
-                <f:validateRegex for="nombre" pattern="[a-zA-Z0-9._%+-]*@[A-Z0-9.-]*\.[A-Z]{0,4}" />
+                <f:validateRegex for="nombre" pattern="[a-zA-Z0-9]+" />
             </p:inputText>
             
             <p:message for="nombre"/>
@@ -36,5 +36,7 @@
             </p:dataTable>
             
         </h:form>
-    </h:body>
+        </ui:define>
+   </ui:composition>
+    
 </html>
