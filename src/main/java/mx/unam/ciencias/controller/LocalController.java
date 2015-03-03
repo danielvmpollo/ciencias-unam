@@ -12,7 +12,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import mx.unam.ciencias.model.Local;
 import org.primefaces.event.map.PointSelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 /**
  *
@@ -27,14 +30,21 @@ public class LocalController {
     
     private Local local;
     
+    private MapModel simpleModel;//
     
     @PostConstruct
     public void init(){
+        simpleModel = new DefaultMapModel(); //
         locales=new ArrayList<>();
         this.local=new Local();
     }
     
     public void guardarLocal(){
+        
+        LatLng coord = new LatLng(local.getLatitud(), local.getLongitud()); //
+        
+        simpleModel.addOverlay(new Marker(coord, local.getNombre()));//
+        
         this.locales.add(local);
         this.local=new Local();
     }
@@ -63,6 +73,14 @@ public class LocalController {
 
     public void setLocal(Local local) {
         this.local = local;
+    }
+
+    public MapModel getSimpleModel() {
+        return simpleModel;
+    }
+
+    public void setSimpleModel(MapModel simpleModel) {
+        this.simpleModel = simpleModel;
     }
     
     
