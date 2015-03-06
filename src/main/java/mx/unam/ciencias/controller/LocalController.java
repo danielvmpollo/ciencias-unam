@@ -11,6 +11,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import mx.unam.ciencias.model.Local;
+import mx.unam.ciencias.model.Menu;
+import mx.unam.ciencias.service.LocalService;
+import mx.unam.ciencias.service.impl.LocalServiceImpl;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
@@ -26,38 +29,56 @@ import org.primefaces.model.map.Marker;
 @ManagedBean
 @SessionScoped
 public class LocalController {
-    
+    /********************Comunicacion con la capa de servicio*************/
+    private LocalService localService;
+
+    /******************Variables usadas en la vista ********************/
     private List<Local> locales;
-    
     private Local local;
-    
-    private MapModel simpleModel;//
-    
+    private Menu menu;
+    private MapModel simpleModel; // es usado en la vista del ver locales
+
     @PostConstruct
     public void init(){
-        simpleModel = new DefaultMapModel(); //
-        locales=new ArrayList<>();
+        localService=LocalServiceImpl.getInstance();
+        locales=localService.findAll();
+        
+        simpleModel = new DefaultMapModel(); 
+        
         this.local=new Local();
+        this.local.setId(this.local.hashCode());
+        this.menu=new Menu();
+        this.local.setMenu(new ArrayList<Menu>());//se agrega la lista del menu
+    
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    }
+    
+    public void guardarMenu(){
+        this.local.getMenu().add(menu);
+        this.menu=new Menu();
     }
     
     public void guardarLocal(){
-        
-        LatLng coord = new LatLng(local.getLatitud(), local.getLongitud()); //
-        
-        simpleModel.addOverlay(new Marker(coord, local.getNombre()));//
-        
-        this.locales.add(local);
+        LatLng coord = new LatLng(local.getLatitud(), local.getLongitud()); 
+        simpleModel.addOverlay(new Marker(coord, local.getNombre()));
+    /*****Operacion con SERVICE**************/
+        this.localService.guardaLocal(local);
+        this.locales=localService.findAll();
+    /***************************************/
         this.local=new Local();
+        this.local.setId(this.local.hashCode());
+        this.local.setMenu(new ArrayList<Menu>());//se agrega la lista del menu
     }
     
     public void seleccion(PointSelectEvent event){
          LatLng latlng = event.getLatLng();
          this.local.setLatitud(latlng.getLat());
          this.local.setLongitud(latlng.getLng());
-         
     }
-    
-
+  
     /***getter y setter
      * @return  **/
     
@@ -84,7 +105,15 @@ public class LocalController {
     public void setSimpleModel(MapModel simpleModel) {
         this.simpleModel = simpleModel;
     }
-    
-    
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+  
     
 }

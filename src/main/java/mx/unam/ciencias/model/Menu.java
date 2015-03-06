@@ -5,12 +5,15 @@
  */
 package mx.unam.ciencias.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author guillermorojas
  */
-public class Menu {
+public class Menu implements Serializable{
     
+    private Integer id;
     
     private String categoria;
     
@@ -18,10 +21,6 @@ public class Menu {
     
     private String descripcion;
     
-     private Double rangoInferior;
-     
-     private Double rangoSuperior;
-
     public String getCategoria() {
         return categoria;
     }
@@ -46,23 +45,12 @@ public class Menu {
         this.descripcion = descripcion;
     }
 
-    public Double getRangoInferior() {
-        return rangoInferior;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRangoInferior(Double rangoInferior) {
-        this.rangoInferior = rangoInferior;
+    public void setId(Integer id) {
+        this.id = id;
     }
-
-    public Double getRangoSuperior() {
-        return rangoSuperior;
-    }
-
-    public void setRangoSuperior(Double rangoSuperior) {
-        this.rangoSuperior = rangoSuperior;
-    }
-     
-     
-     
-    
+ 
 }

@@ -41,15 +41,32 @@
             <h4>Alta local</h4>
             
             <h:form id="form">
+                
+                <!-- Seccion de los locales -->
                <h:panelGrid id="local" columns="3">
                     <p:outputLabel value="Nombre local" />
                     <p:inputText id="nombre" value="#{localController.local.nombre}" required="true" />
                     <p:message for="nombre" />
+                
+                   <h:outputText id="rango" value="Rango de precios:" />
+                   <p:slider  minValue="20" maxValue="2000" 
+                              for="inferior,superior" 
+                              display="rango" style="width: 400px" 
+                              range="true" 
+                              displayTemplate="Precios entre $ {min} y $ {max} " />
+                   <p:message for="rango" />
+                                     
+                   <h:inputHidden  id="inferior" value="#{localController.local.rangoInferior}" required="true" />
+                   <h:inputHidden  id="superior" value="#{localController.local.rangoSuperior}" required="true" />
+                   <p:separator/>
+                   
+                   <p:separator/>
+                   <p:message for="superior" />
+                   <p:message for="inferior" />
 
-                    <p:outputLabel value="Categoria" />
-                    <p:inputText id="categoria" value="#{localController.local.categoria}" required="true" />
-                    <p:message for="categoria" />
                </h:panelGrid>
+                <!-- Seccion de los locales -->
+                <!-- Seccion del mapa -->
                 <p:outputLabel value="Ubicacion" />
                  <p:gmap id="gmap" center="19.3142052,-99.1835216" zoom="13" 
                         type="HYBRID" 
@@ -71,6 +88,34 @@
                     <p:message for="long" />
                 </h:panelGrid>
                 <br/>
+                <!-- Seccion del mapa -->
+                
+                
+                <!-- Seccion de los menus -->
+                <h:panelGrid columns="3" id="panelMenu">
+                    <p:outputLabel value="Nombre" />
+                    <p:inputText id="menuNombre" value="#{localController.menu.nombre}"  />
+                    <p:message for="menuNombre" />
+                    
+                    <p:outputLabel value="Nombre" />
+                        <p:selectOneMenu id="categoria" value="#{localController.menu.categoria}"  >
+                            <f:selectItem itemLabel="Vegetariana" itemValue="Vegetariana" />
+                            <f:selectItem itemLabel="Carnes" itemValue="Carnes" />
+                        </p:selectOneMenu>
+                    <p:message for="categoria" />
+                    
+                    
+                    <p:outputLabel value="Descripcion" />
+                    <p:editor id="descripcion" value="#{localController.menu.descripcion}" />
+                    <p:message for="descripcion" />
+                
+                    <p:commandButton value="Guardar Menu" actionListener="#{localController.guardarMenu()}" update=":menus @form" /> 
+                    
+                </h:panelGrid>
+                <!-- Seccion de los menus -->
+                
+                
+                
                 <p:commandButton ajax="false"   
                      actionListener="#{localController.guardarLocal()}" 
                     value="Guardar" update=":locales @form" />
@@ -78,26 +123,24 @@
             </h:form>
 
 
-            <h:form id="locales">
-            <p:dataTable  value="#{localController.locales}" 
-                          var="_local" >
+            <h:form id="menus">
+                <p:dataTable  value="#{localController.local.menu}" 
+                          var="_menu" >
                 <p:column>
-                    #{_local.nombre}
+                    #{_menu.categoria}
                 </p:column>
-                  <p:column>
-                    #{_local.categoria}
+                
+                <p:column>
+                    #{_menu.nombre}
                 </p:column>
-
-                 <p:column>
-                    #{_local.latitud}
+                <p:column>
+                    #{_menu.descripcion}
                 </p:column>
-
-                 <p:column>
-                    #{_local.longitud}
-                </p:column>
-
+                    
             </p:dataTable>
             </h:form>
+       
+            
         </ui:define>
  
     </ui:composition>

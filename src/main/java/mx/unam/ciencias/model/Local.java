@@ -5,26 +5,30 @@
  */
 package mx.unam.ciencias.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author guillermorojas
  */
-public class Local {
+public class Local implements Serializable{
     
+    private Integer id;
     
     private String nombre;
     
-     private String categoria;
-    
     private Double latitud;
     
-     private Double longitud;
+    private Double longitud;
      
-     private Menu recomendacion;
+    private Double rangoInferior;
      
-     private List<Menu> menu;
+    private Double rangoSuperior;
+     
+    private Menu recomendacion;
+     
+    private List<Menu> menu;
 
     public String getNombre() {
         return nombre;
@@ -32,14 +36,6 @@ public class Local {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public Double getLatitud() {
@@ -72,6 +68,30 @@ public class Local {
 
     public void setMenu(List<Menu> menu) {
         this.menu = menu;
+    }
+
+    public Double getRangoInferior() {
+        return rangoInferior;
+    }
+
+    public void setRangoInferior(Double rangoInferior) {
+        this.rangoInferior = rangoInferior;
+    }
+
+    public Double getRangoSuperior() {
+        return rangoSuperior;
+    }
+
+    public void setRangoSuperior(Double rangoSuperior) {
+        this.rangoSuperior = rangoSuperior;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
      
      
