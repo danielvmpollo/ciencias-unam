@@ -32,6 +32,8 @@ public class LocalController {
     /********************Comunicacion con la capa de servicio*************/
     private LocalService localService;
 
+    private String terminoBusqueda;
+    
     /******************Variables usadas en la vista ********************/
     private List<Local> locales;
     private Local local;
@@ -55,7 +57,7 @@ public class LocalController {
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
         }
     }
-    
+
     public void guardarMenu(){
         this.local.getMenu().add(menu);
         this.menu=new Menu();
@@ -78,6 +80,34 @@ public class LocalController {
          this.local.setLatitud(latlng.getLat());
          this.local.setLongitud(latlng.getLng());
     }
+    
+    public void buscarPorNombre(){
+        this.locales=localService.findByNombre(terminoBusqueda);
+         simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    }
+    
+     public void buscarPorCategoria(){
+        this.locales=localService.findByCategoria(terminoBusqueda);
+         simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    }
+     
+     public void borraLocal(Local loc){
+         localService.eliminarLocal(loc);
+         this.locales=localService.findAll();
+          simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+     }
   
     /***getter y setter
      * @return  **/
@@ -112,6 +142,14 @@ public class LocalController {
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    public String getTerminoBusqueda() {
+        return terminoBusqueda;
+    }
+
+    public void setTerminoBusqueda(String terminoBusqueda) {
+        this.terminoBusqueda = terminoBusqueda;
     }
 
   

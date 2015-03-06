@@ -26,6 +26,18 @@
                         >
                 </p:gmap>
             
+            <br/>
+            <p:inputText value="#{localController.terminoBusqueda}"/>
+            <p:commandButton ajax="true" update="@form"
+                             value="Buscar por nombre"
+                             actionListener="#{localController.buscarPorNombre()}"
+                             />
+            <p:commandButton ajax="true" update="@form"
+                             value="Buscar por categoria"
+                             actionListener="#{localController.buscarPorCategoria()}"
+                             />
+            
+            
             
             <p:dataTable  value="#{localController.locales}" 
                           var="_local" >
