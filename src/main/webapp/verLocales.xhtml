@@ -37,37 +37,53 @@
                              actionListener="#{localController.buscarPorCategoria()}"
                              />
             
+              <p:commandButton ajax="true" update="@form"
+                             value="Buscar por nombre menu"
+                             actionListener="#{localController.buscarPorNombreMenu()}"
+                             />
+            
             
             
             <p:dataTable  value="#{localController.locales}" 
                           var="_local" >
                 
-                <p:column>
+                <p:column headerText="Id">
                     #{_local.id}
                 </p:column>
-                <p:column>
+                <p:column headerText="Nombre">
                     #{_local.nombre}
                 </p:column>
-                 <p:column>
+                <p:column headerText="Latitud">
                     #{_local.latitud}
                 </p:column>
 
-                 <p:column>
+                <p:column headerText="Longitud">
                     #{_local.longitud}
                 </p:column>
-                <p:column>
+                <p:column headerText="Rango Inferior">
                     <p:outputLabel value="#{_local.rangoInferior}" >
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
                 </p:column>
-                <p:column>
+                <p:column headerText="Rango superior">
                     <p:outputLabel value="#{_local.rangoSuperior}"  >
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
                 </p:column>
                 <p:column>
-                    #{_local.menu.size()}
+                    <p:commandButton actionListener="#{localController.borraLocal(_local)}"
+                                     update="@form"
+                                     value="Borrar"
+                                     ajax="true"/>
                 </p:column>
+                <p:column>
+                    <ul>
+                        <ui:repeat value="#{_local.menu}" var="_menu" >
+                            <li>#{_menu.nombre} (#{_menu.categoria}) </li>
+                        </ui:repeat>
+                    </ul>
+                </p:column>
+
                 
             </p:dataTable>
             

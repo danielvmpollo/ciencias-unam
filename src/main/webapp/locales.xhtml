@@ -126,14 +126,14 @@
             <h:form id="menus">
                 <p:dataTable  value="#{localController.local.menu}" 
                           var="_menu" >
-                <p:column>
+                    <p:column headerText="Categoria">
                     #{_menu.categoria}
                 </p:column>
                 
-                <p:column>
+                    <p:column headerText="Nombre">
                     #{_menu.nombre}
                 </p:column>
-                <p:column>
+                    <p:column headerText="Descripcion">
                     #{_menu.descripcion}
                 </p:column>
                     

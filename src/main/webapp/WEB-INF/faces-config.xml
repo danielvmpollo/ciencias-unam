@@ -5,6 +5,20 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     
+    
+    
+        <application>
+          <variable-resolver>
+            org.springframework.web.jsf.DelegatingVariableResolver
+          </variable-resolver>
+     </application>
+    <!--
+    <managed-bean>
+        <managed-bean-class>mx.unam.ciencias.controller.LocalController</managed-bean-class>
+        <managed-bean-name>localController</managed-bean-name>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    -->
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
@@ -25,5 +39,27 @@
              <redirect/>
         </navigation-case>
 
+        <navigation-case>
+            <from-action>verLocales</from-action>
+            <to-view-id>verLocales.xhtml</to-view-id>
+             <redirect/>
+        </navigation-case>
+
     </navigation-rule>
+    
+    
+    
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        
+        
+        <navigation-case>
+            <from-action>verLocales</from-action>
+            <to-view-id>locales.xhtml</to-view-id>
+        </navigation-case>
+        
+    
+    </navigation-rule>
+    
+    
 </faces-config>

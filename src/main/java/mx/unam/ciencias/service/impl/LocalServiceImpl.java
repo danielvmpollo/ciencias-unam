@@ -10,29 +10,24 @@ import mx.unam.ciencias.dao.LocalRepository;
 import mx.unam.ciencias.dao.dummy.LocalRepositoryImpl;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.service.LocalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author guillermorojas
  */
+@Service("localServiceImpl")
+@Scope("singleton")
 public class LocalServiceImpl implements LocalService{
-
-    private static LocalService localService;
     
+    @Autowired
     private  LocalRepository localRepository;
     
-    private LocalServiceImpl(){
-        localRepository=LocalRepositoryImpl.getInstance();
-    } 
     
-    public static LocalService getInstance(){
-        if(localService==null){
-            localService=new LocalServiceImpl();
-        }
-        return localService;
-    } 
-    
-    
+    private String nombre;
+        
     @Override
     public void guardaLocal(Local local) {
         localRepository.save(local);
@@ -57,5 +52,19 @@ public class LocalServiceImpl implements LocalService{
     public List<Local> findByCategoria(String categoria) {
        return localRepository.findByCategoria(categoria);
     }
+    
+     @Override
+    public List<Local> findByMenu(String nombreMenu) {
+       return localRepository.findByNombreMenu(nombreMenu);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     
 }

@@ -30,4 +30,6 @@ public interface LocalRepository {
     
     List<Local> findByCategoria(String categoria);
     
+    List<Local> findByNombreMenu(String menu);
+    
 }

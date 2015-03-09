@@ -5,6 +5,7 @@
  */
 package mx.unam.ciencias.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,16 +21,19 @@ import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author guillermorojas
  */
-
-@ManagedBean
-@SessionScoped
-public class LocalController {
+@Controller("localController")
+@Scope("session")
+public class LocalController implements Serializable{
     /********************Comunicacion con la capa de servicio*************/
+    @Autowired
     private LocalService localService;
 
     private String terminoBusqueda;
@@ -42,12 +46,11 @@ public class LocalController {
 
     @PostConstruct
     public void init(){
-        localService=LocalServiceImpl.getInstance();
         locales=localService.findAll();
         
         simpleModel = new DefaultMapModel(); 
         
-        this.local=new Local();
+       // this.local=new Local();
         this.local.setId(this.local.hashCode());
         this.menu=new Menu();
         this.local.setMenu(new ArrayList<Menu>());//se agrega la lista del menu
@@ -98,6 +101,16 @@ public class LocalController {
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
         }
     }
+     
+      public void buscarPorNombreMenu(){
+        this.locales=localService.findByMenu(terminoBusqueda);
+         simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    }
+     
      
      public void borraLocal(Local loc){
          localService.eliminarLocal(loc);

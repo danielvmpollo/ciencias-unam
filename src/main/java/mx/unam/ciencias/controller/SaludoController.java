@@ -11,14 +11,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 /**
  *
  * @author guillermorojas
  */
 
 
-@ManagedBean(name="saludoController")
-@SessionScoped
+@Controller("saludoController")
+@Scope("session")
 public class SaludoController {
 
     
