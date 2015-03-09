@@ -12,21 +12,25 @@ import mx.unam.ciencias.dao.LocalRepository;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.model.Menu;
 import mx.unam.ciencias.utils.GuardaObjectoFile;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author guillermorojas
  */
+@Service("localRepository")
+@Scope("singleton")
 public class LocalRepositoryImpl implements LocalRepository,Serializable{
     
-    //private static final String FILE_NAME="/Users/guillermorojas/Desktop/locales.serialized";
-    private static final String FILE_NAME="locales.serialized";
+    private static final String FILE_NAME="/Users/guillermorojas/Desktop/locales.serialized";
+  //  private static final String FILE_NAME="locales.serialized";
     
     private List<Local> locales;
     
-    private static LocalRepository localRepository;
+ 
     
-    private LocalRepositoryImpl(){
+    public LocalRepositoryImpl(){
         if(GuardaObjectoFile.recuperaObjecto(FILE_NAME)==null){
             locales=new ArrayList<>();
         }
@@ -35,12 +39,7 @@ public class LocalRepositoryImpl implements LocalRepository,Serializable{
         }
     }
     
-    public static LocalRepository getInstance(){
-        if(localRepository==null){
-            localRepository=new LocalRepositoryImpl();
-        }
-        return localRepository;
-    }
+
     
     @Override
     public void save(Local local) {
@@ -101,7 +100,7 @@ public class LocalRepositoryImpl implements LocalRepository,Serializable{
     public List<Local> findByNombre(String nombre) {
         List<Local> localesBusqueda=new ArrayList<>();
         for(Local local:locales){
-            if(local.getNombre().contains(nombre)){
+            if(local.getNombre().toLowerCase().contains(nombre.toLowerCase())){
                 localesBusqueda.add(local);
             }
         }
@@ -114,7 +113,7 @@ public class LocalRepositoryImpl implements LocalRepository,Serializable{
         for(Local local:locales){
             if(local.getMenu()!=null){
                 for(Menu menu:local.getMenu()){
-                    if(menu.getCategoria().equals(categoria)){
+                    if(menu.getCategoria().toLowerCase().contains(categoria.toLowerCase())){
                         localesBusqueda.add(local);
                         break;
                     }
@@ -123,5 +122,12 @@ public class LocalRepositoryImpl implements LocalRepository,Serializable{
         }
         return localesBusqueda;
     }
+
+    @Override
+    public List<Local> findByNombreMenu(String menu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+   
     
 }
