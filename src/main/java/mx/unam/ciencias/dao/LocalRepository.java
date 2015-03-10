@@ -21,7 +21,7 @@ public interface LocalRepository {
     void delete(Iterable<Local> locales);/******/
     
     List<Local> findAll();
-    
+
     Local findOne(Integer id);/******/
     
     boolean exists(Integer id);/******/

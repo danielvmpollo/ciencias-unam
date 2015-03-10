@@ -123,22 +123,21 @@
             </h:form>
 
 
-            <h:form id="menus">
+        <h:form id="menus">
                 <p:dataTable  value="#{localController.local.menu}" 
                           var="_menu" >
                     <p:column headerText="Categoria">
-                    #{_menu.categoria}
-                </p:column>
-                
+                        #{_menu.categoria}
+                    </p:column>
                     <p:column headerText="Nombre">
-                    #{_menu.nombre}
-                </p:column>
+                        #{_menu.nombre}
+                    </p:column>
                     <p:column headerText="Descripcion">
-                    #{_menu.descripcion}
-                </p:column>
+                        #{_menu.descripcion}
+                    </p:column>
                     
             </p:dataTable>
-            </h:form>
+        </h:form>
        
             
         </ui:define>

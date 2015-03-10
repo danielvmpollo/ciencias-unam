@@ -7,7 +7,6 @@ package mx.unam.ciencias.service.impl;
 
 import java.util.List;
 import mx.unam.ciencias.dao.LocalRepository;
-import mx.unam.ciencias.dao.dummy.LocalRepositoryImpl;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +17,11 @@ import org.springframework.stereotype.Service;
  *
  * @author guillermorojas
  */
-@Service("localServiceImpl")
-@Scope("singleton")
 public class LocalServiceImpl implements LocalService{
     
     @Autowired
     private  LocalRepository localRepository;
     
-    
-    private String nombre;
         
     @Override
     public void guardaLocal(Local local) {
@@ -58,13 +53,4 @@ public class LocalServiceImpl implements LocalService{
        return localRepository.findByNombreMenu(nombreMenu);
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
-    
 }

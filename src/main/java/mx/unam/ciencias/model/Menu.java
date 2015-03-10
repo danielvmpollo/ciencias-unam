@@ -52,5 +52,5 @@ public class Menu implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
- 
+
 }

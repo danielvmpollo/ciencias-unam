@@ -19,8 +19,6 @@ import org.springframework.stereotype.Service;
  *
  * @author guillermorojas
  */
-@Service("localRepository")
-@Scope("singleton")
 public class LocalRepositoryImpl implements LocalRepository,Serializable{
     
     private static final String FILE_NAME="/Users/guillermorojas/Desktop/locales.serialized";

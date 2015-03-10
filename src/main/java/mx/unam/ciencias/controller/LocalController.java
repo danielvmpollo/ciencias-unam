@@ -9,13 +9,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.model.Menu;
 import mx.unam.ciencias.service.LocalService;
-import mx.unam.ciencias.service.impl.LocalServiceImpl;
-import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -36,9 +32,8 @@ public class LocalController implements Serializable{
     @Autowired
     private LocalService localService;
 
-    private String terminoBusqueda;
-    
     /******************Variables usadas en la vista ********************/
+    private String terminoBusqueda;
     private List<Local> locales;
     private Local local;
     private Menu menu;
@@ -50,11 +45,8 @@ public class LocalController implements Serializable{
         
         simpleModel = new DefaultMapModel(); 
         
-       // this.local=new Local();
-        this.local.setId(this.local.hashCode());
         this.menu=new Menu();
         this.local.setMenu(new ArrayList<Menu>());//se agrega la lista del menu
-    
         for(Local l:this.locales){
             LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
@@ -63,7 +55,7 @@ public class LocalController implements Serializable{
 
     public void guardarMenu(){
         this.local.getMenu().add(menu);
-        this.menu=new Menu();
+        this.menu=new Menu();   
     }
     
     public void guardarLocal(){
@@ -74,7 +66,6 @@ public class LocalController implements Serializable{
         this.locales=localService.findAll();
     /***************************************/
         this.local=new Local();
-        this.local.setId(this.local.hashCode());
         this.local.setMenu(new ArrayList<Menu>());//se agrega la lista del menu
     }
     
@@ -110,8 +101,7 @@ public class LocalController implements Serializable{
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
         }
     }
-     
-     
+      
      public void borraLocal(Local loc){
          localService.eliminarLocal(loc);
          this.locales=localService.findAll();
@@ -164,7 +154,5 @@ public class LocalController implements Serializable{
     public void setTerminoBusqueda(String terminoBusqueda) {
         this.terminoBusqueda = terminoBusqueda;
     }
-
   
-    
 }

@@ -93,8 +93,8 @@ public class Local implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-     
-     
-     
+
     
+     
+       
 }

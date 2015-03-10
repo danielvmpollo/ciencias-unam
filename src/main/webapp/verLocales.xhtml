@@ -79,12 +79,13 @@
                 <p:column>
                     <ul>
                         <ui:repeat value="#{_local.menu}" var="_menu" >
-                            <li>#{_menu.nombre} (#{_menu.categoria}) </li>
+                            <li>#{_menu.nombre} (#{_menu.categoria})</li>
                         </ui:repeat>
                     </ul>
                 </p:column>
-
-                
+                <p:column>
+                    <p:commandButton action="locales" actionListener="#{localController.setLocal(_local)}" />
+                </p:column>
             </p:dataTable>
             
             
