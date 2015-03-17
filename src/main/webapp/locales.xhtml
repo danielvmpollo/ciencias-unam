@@ -125,15 +125,23 @@
 
         <h:form id="menus">
                 <p:dataTable  value="#{localController.local.menu}" 
-                          var="_menu" >
+                          var="$_menu" >
                     <p:column headerText="Categoria">
-                        #{_menu.categoria}
+                        #{$_menu.categoria}
                     </p:column>
                     <p:column headerText="Nombre">
-                        #{_menu.nombre}
+                        #{$_menu.nombre}
                     </p:column>
                     <p:column headerText="Descripcion">
-                        #{_menu.descripcion}
+                        #{$_menu.descripcion}
+                    </p:column>
+                    <p:column>
+                        <p:commandButton rendered="#{localController.local.recomendacion ne $_menu}" 
+                                        value="Recomendar" 
+                                         update="@form" 
+                                         action="#{localController.local.setRecomendacion($_menu)}" />
+                        <p:outputLabel value="Recomendado" 
+                                       rendered="#{localController.local.recomendacion eq $_menu}"  />
                     </p:column>
                     
             </p:dataTable>
