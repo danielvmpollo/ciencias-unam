@@ -6,8 +6,9 @@
 package mx.unam.ciencias.service.impl;
 
 import java.util.List;
-import mx.unam.ciencias.dao.LocalRepository;
+import mx.unam.ciencias.repository.LocalRepository;
 import mx.unam.ciencias.model.Local;
+import mx.unam.ciencias.model.Menu;
 import mx.unam.ciencias.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,6 +26,9 @@ public class LocalServiceImpl implements LocalService{
         
     @Override
     public void guardaLocal(Local local) {
+        for(Menu menu:local.getMenu()){
+            menu.setLocal(local);
+        }
         localRepository.save(local);
     }
 

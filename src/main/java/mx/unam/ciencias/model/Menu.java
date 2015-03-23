@@ -6,20 +6,40 @@
 package mx.unam.ciencias.model;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author guillermorojas
  */
+@Entity
+@Table(name="MENU")
 public class Menu implements Serializable{
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     
+    @NotNull
     private String categoria;
     
+    @NotNull
     private String nombre;
-    
+       
     private String descripcion;
+    
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
+    private Local local;
     
     public String getCategoria() {
         return categoria;
@@ -52,5 +72,24 @@ public class Menu implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.categoria);
+        hash = 61 * hash + Objects.hashCode(this.nombre);
+        hash = 61 * hash + Objects.hashCode(this.descripcion);
+        return hash;
+    }
+
 
 }

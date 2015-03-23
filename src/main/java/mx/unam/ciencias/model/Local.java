@@ -7,27 +7,60 @@ package mx.unam.ciencias.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
  * @author guillermorojas
  */
+@Entity
+@Table(name = "LOCAL")
 public class Local implements Serializable{
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     
+    @NotNull
+    @Column(name = "NOMBRE")
     private String nombre;
     
+    @NotNull
+    @Column(name = "LATITUD")
     private Double latitud;
     
+    @NotNull
+    @Column(name = "LONGITUD")
     private Double longitud;
      
+    @NotNull
+    @Column(name = "RANGO_INFERIOR")
     private Double rangoInferior;
      
+    @NotNull
+    @Column(name = "RANGO_SUPERIOR")
     private Double rangoSuperior;
      
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     private Menu recomendacion;
      
+    
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "local",
+            orphanRemoval = true)
     private List<Menu> menu;
 
     public String getNombre() {
@@ -93,6 +126,19 @@ public class Local implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.nombre);
+        hash = 17 * hash + Objects.hashCode(this.latitud);
+        hash = 17 * hash + Objects.hashCode(this.longitud);
+        hash = 17 * hash + Objects.hashCode(this.rangoInferior);
+        hash = 17 * hash + Objects.hashCode(this.rangoSuperior);
+        return hash;
+    }
+
 
     
      
