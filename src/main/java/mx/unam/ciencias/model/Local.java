@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -62,6 +63,10 @@ public class Local implements Serializable{
             mappedBy = "local",
             orphanRemoval = true)
     private List<Menu> menu;
+    
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<RutaPumaBus> rutas;
     
     public String getNombre() {
         return nombre;
@@ -137,6 +142,14 @@ public class Local implements Serializable{
         hash = 17 * hash + Objects.hashCode(this.rangoInferior);
         hash = 17 * hash + Objects.hashCode(this.rangoSuperior);
         return hash;
+    }
+
+    public List<RutaPumaBus> getRutas() {
+        return rutas;
+    }
+
+    public void setRutas(List<RutaPumaBus> rutas) {
+        this.rutas = rutas;
     }
 
   

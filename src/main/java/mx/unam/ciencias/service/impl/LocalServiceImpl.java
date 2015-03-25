@@ -9,6 +9,7 @@ import java.util.List;
 import mx.unam.ciencias.repository.LocalRepository;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.model.Menu;
+import mx.unam.ciencias.repository.RutaPumaBusRespository;
 import mx.unam.ciencias.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,7 +24,9 @@ public class LocalServiceImpl implements LocalService{
     @Autowired
     private  LocalRepository localRepository;
     
-        
+    @Autowired
+    private  RutaPumaBusRespository rutaPumaBusRespository;   
+    
     @Override
     public void guardaLocal(Local local) {
         for(Menu menu:local.getMenu()){
