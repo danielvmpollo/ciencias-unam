@@ -44,6 +44,11 @@
             <to-view-id>verLocales.xhtml</to-view-id>
              <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-action>rutas</from-action>
+            <to-view-id>rutasPumaBus.xhtml</to-view-id>
+             <redirect/>
+        </navigation-case>
 
     </navigation-rule>
     

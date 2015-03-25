@@ -41,9 +41,9 @@
                              value="Buscar por nombre menu"
                              actionListener="#{localController.buscarPorNombreMenu()}"
                              />
+
             
-            
-            
+                        
             <p:dataTable  value="#{localController.locales}" 
                           var="_local" >
                 
@@ -82,7 +82,7 @@
                             <li>#{_menu.nombre} (#{_menu.categoria})</li>
                         </ui:repeat>
                     </ul>
-                </p:column>
+                </p:column>              
                 <p:column>
                     <p:commandButton action="locales" actionListener="#{localController.setLocal(_local)}" />
                 </p:column>

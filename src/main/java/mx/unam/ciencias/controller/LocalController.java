@@ -38,7 +38,7 @@ public class LocalController implements Serializable{
     private Local local;
     private Menu menu;
     private MapModel simpleModel; // es usado en la vista del ver locales
-
+    
     @PostConstruct
     public void init(){
         locales=localService.findAll();
@@ -101,7 +101,7 @@ public class LocalController implements Serializable{
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
         }
     }
-      
+            
      public void borraLocal(Local loc){
          localService.eliminarLocal(loc);
          this.locales=localService.findAll();

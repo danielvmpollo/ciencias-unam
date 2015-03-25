@@ -25,5 +25,5 @@ public interface LocalService {
     List<Local> findByCategoria(String categoria);
     
     List<Local> findByMenu(String nombreMenu);
-  
+    
 }

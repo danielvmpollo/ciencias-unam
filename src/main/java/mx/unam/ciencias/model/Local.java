@@ -62,7 +62,7 @@ public class Local implements Serializable{
             mappedBy = "local",
             orphanRemoval = true)
     private List<Menu> menu;
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -126,7 +126,7 @@ public class Local implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -139,8 +139,8 @@ public class Local implements Serializable{
         return hash;
     }
 
+  
 
     
      
-       
 }

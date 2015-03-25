@@ -29,7 +29,7 @@ public interface LocalRepository extends CrudRepository<Local, Integer>{
     @Query("SELECT l FROM Local l WHERE l IN (SELECT m.local FROM Menu m WHERE m.nombre LIKE CONCAT('%',?,'%') ) ")
     List<Local> findByNombreMenu(String menu);
     
-    @Query("SELECT l FROM Local l WHERE l.rangoInferior BETWEEN ? AND ?")
+    @Query("SELECT l FROM Local l WHERE l.rangoInferior > ? AND l.rangoSuperior< ?")
     List<Local> findByRangoInferior(Integer rangoInferior,Integer rangoSuperior);
     
 }

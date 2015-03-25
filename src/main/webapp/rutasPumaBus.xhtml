@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+        
+   <ui:composition template="/template/template.xhtml" >
+          
+
+        <ui:define name="content">
+            
+                      
+            <h4>Alta Ruta</h4>
+            
+            <h:form id="form">
+                
+                <!-- Seccion de los locales -->
+               <h:panelGrid id="nombreRuta" columns="3">
+                    <p:outputLabel value="Nombre local" />
+                    <p:inputText id="nombre" value="#{rutaPumaController.rutaPumaBus.nombreRuta}" required="true" />
+                    <p:message for="nombre" />     
+               </h:panelGrid>
+                <p:commandButton ajax="true"   
+                                 actionListener="#{rutaPumaController.guardaRuta()}" 
+                    value="Guardar" update=":rutas @form" />
+
+            </h:form>
+
+
+        <h:form id="rutas">
+            <p:dataTable  value="#{rutaPumaController.rutas}" 
+                          var="_ruta" >
+                    <p:column headerText="ID">
+                        #{_ruta.id}
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        #{_ruta.nombreRuta}
+                    </p:column> 
+                
+            </p:dataTable>
+        </h:form>
+       
+            
+        </ui:define>
+ 
+    </ui:composition>
+</html>
