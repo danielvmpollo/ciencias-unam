@@ -9,6 +9,7 @@ import java.util.List;
 import mx.unam.ciencias.repository.LocalRepository;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.model.Menu;
+import mx.unam.ciencias.model.RutaPumaBus;
 import mx.unam.ciencias.repository.RutaPumaBusRespository;
 import mx.unam.ciencias.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,12 @@ public class LocalServiceImpl implements LocalService{
     public List<Local> findByMenu(String nombreMenu) {
        return localRepository.findByNombreMenu(nombreMenu);
     }
+
+    @Override
+    public List<RutaPumaBus> findAllRutas() {
+        return rutaPumaBusRespository.findAll();
+    }
+
+
 
 }

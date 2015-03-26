@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.model.Menu;
+import mx.unam.ciencias.model.RutaPumaBus;
 import mx.unam.ciencias.service.LocalService;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
@@ -38,9 +39,13 @@ public class LocalController implements Serializable{
     private Local local;
     private Menu menu;
     private MapModel simpleModel; // es usado en la vista del ver locales
+    private List<RutaPumaBus> rutas;
+    
     
     @PostConstruct
     public void init(){
+        
+        rutas=this.localService.findAllRutas();
         locales=localService.findAll();
         
         simpleModel = new DefaultMapModel(); 
@@ -154,5 +159,15 @@ public class LocalController implements Serializable{
     public void setTerminoBusqueda(String terminoBusqueda) {
         this.terminoBusqueda = terminoBusqueda;
     }
+
+    public List<RutaPumaBus> getRutas() {
+        return rutas;
+    }
+
+    public void setRutas(List<RutaPumaBus> rutas) {
+        this.rutas = rutas;
+    }
+    
+    
   
 }

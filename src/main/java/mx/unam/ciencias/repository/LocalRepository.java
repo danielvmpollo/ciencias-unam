@@ -32,4 +32,7 @@ public interface LocalRepository extends CrudRepository<Local, Integer>{
     @Query("SELECT l FROM Local l WHERE l.rangoInferior > ? AND l.rangoSuperior< ?")
     List<Local> findByRangoInferior(Integer rangoInferior,Integer rangoSuperior);
     
+    @Query("SELECT l FROM Local l JOIN FECTH RutaPumaBus r "+
+           "WHERE r.nombreRuta LIKE CONCAT('%',?,'%')")
+    List<Local> findByRutaPumaBus(String nombreRuta);
 }

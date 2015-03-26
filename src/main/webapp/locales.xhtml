@@ -64,7 +64,16 @@
                    <p:message for="superior" />
                    <p:message for="inferior" />
 
-                   <!-- Rutas Puma Bus -->                  
+                   <p:dataTable value="#{localController.rutas}" 
+                                var="_ruta" 
+                                rowKey="#{_ruta.id}"
+                                selection="#{localController.local.rutas}"
+                                >                       
+                       <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                       <p:column>#{_ruta.nombreRuta}</p:column>
+                   </p:dataTable> 
+                   
+                   
                </h:panelGrid>
                 <!-- Seccion de los locales -->
                 <!-- Seccion del mapa -->

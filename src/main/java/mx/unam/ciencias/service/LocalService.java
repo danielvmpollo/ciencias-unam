@@ -7,6 +7,7 @@ package mx.unam.ciencias.service;
 
 import java.util.List;
 import mx.unam.ciencias.model.Local;
+import mx.unam.ciencias.model.RutaPumaBus;
 
 /**
  *
@@ -25,5 +26,7 @@ public interface LocalService {
     List<Local> findByCategoria(String categoria);
     
     List<Local> findByMenu(String nombreMenu);
+    
+    List<RutaPumaBus> findAllRutas();
     
 }
