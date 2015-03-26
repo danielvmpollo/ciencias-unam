@@ -106,6 +106,16 @@ public class LocalController implements Serializable{
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
         }
     }
+      
+       public void buscarPorNombreRuta(){
+        this.locales=localService.findByRutas(terminoBusqueda);
+         simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    }
+      
             
      public void borraLocal(Local loc){
          localService.eliminarLocal(loc);

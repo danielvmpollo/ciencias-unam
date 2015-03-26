@@ -29,4 +29,6 @@ public interface LocalService {
     
     List<RutaPumaBus> findAllRutas();
     
+    List<Local> findByRutas(String nombreRuta);
+    
 }

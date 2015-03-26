@@ -66,6 +66,11 @@ public class LocalServiceImpl implements LocalService{
         return rutaPumaBusRespository.findAll();
     }
 
+    @Override
+    public List<Local> findByRutas(String nombreRuta) {
+        return localRepository.findByRutaPumaBus(nombreRuta);
+    }
+
 
 
 }
