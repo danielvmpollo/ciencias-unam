@@ -11,15 +11,14 @@
             <script type="text/javascript" 
                 src="http://maps.googleapis.com/maps/api/js"
                 />
-            
-          <h:form id="locales" >
+           
+         <h:form id="form" >
             <h4>Ver local</h4>
                  <p:gmap id="gmap" 
                          center="19.3142052,-99.1835216" 
                          zoom="13" 
                         type="HYBRID" 
                         style="width:600px;height:400px"
-                        onPointClick="agregaMarcador(event);"
                         widgetVar="map"
                         disableDoubleClickZoom="true"  
                         model="#{localController.simpleModel}"
@@ -28,9 +27,37 @@
             
             <br/>
            
+        <p:separator/>
+                   <h:outputText id="rango" value="Rango de precios:" />
+                   <p:slider  minValue="20" maxValue="2000" 
+                              for="inferior,superior" 
+                              display="rango" style="width: 400px" 
+                              range="true" 
+                              displayTemplate="Precios entre $ {min} y $ {max} " />
+                   <p:commandButton ajax="true" update="@form"
+                             value="Buscar por rangos"
+                             actionListener="#{localController.buscarPorRango()}"
+                             />                                   
+                   <h:inputHidden  id="inferior" value="#{localController.inferior}"  />
+                   <h:inputHidden  id="superior" value="#{localController.superior}"  />
+              
+        <p:separator/>
+                   
+                   <p:selectOneMenu value="#{localController.rutaBusqueda}" >
+                       <f:selectItems value="#{localController.rutas}" 
+                                      var="_ruta"
+                                      itemValue="#{_ruta.nombreRuta}"
+                                      itemLabel="#{_ruta.nombreRuta}"
+                                      />
+                   </p:selectOneMenu>
+                   <p:commandButton ajax="true" update="@form"
+                             value="Buscar por Ruta"
+                             actionListener="#{localController.buscarPorNombreRuta()}"/>     
+        <p:separator/>
+                   
             <p:inputText value="#{localController.terminoBusqueda}"/>
-               
-          
+           
+                            
             <p:commandButton ajax="true" update="@form"
                              value="Buscar por nombre"
                              actionListener="#{localController.buscarPorNombre()}"
@@ -45,17 +72,13 @@
                              actionListener="#{localController.buscarPorNombreMenu()}"
                              />
               
-              <p:commandButton ajax="true" update="@form"
-                             value="Buscar por Ruta"
-                             actionListener="#{localController.buscarPorNombreRuta()}"
-                             />
-
-            
-                        
+             
+              <p:separator/>              
+                                  
             <p:dataTable  value="#{localController.locales}" 
-                          var="_local" >
-                
-                <p:column headerText="Id">
+                          id="locales"
+                          var="_local" >  
+                <p:column headerText="Id" rendered="false">
                     #{_local.id}
                 </p:column>
                 <p:column headerText="Nombre">
@@ -78,7 +101,7 @@
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
                 </p:column>
-                <p:column>
+                <p:column rendered="false">
                     <p:commandButton actionListener="#{localController.borraLocal(_local)}"
                                      update="@form"
                                      value="Borrar"
@@ -87,7 +110,7 @@
                 <p:column>
                     <ul>
                         <ui:repeat value="#{_local.menu}" var="_menu" >
-                            <li>#{_menu.nombre} (#{_menu.categoria})</li>
+                            <li>#{_menu eq _local.recomendacion?'*':''}#{_menu.nombre} (#{_menu.categoria})</li>
                         </ui:repeat>
                     </ul>
                 </p:column> 

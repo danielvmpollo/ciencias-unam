@@ -5,7 +5,6 @@
  */
 package mx.unam.ciencias.repository;
 
-import java.io.Serializable;
 import java.util.List;
 import mx.unam.ciencias.model.Local;
 import org.springframework.data.jpa.repository.Query;
@@ -30,8 +29,12 @@ public interface LocalRepository extends CrudRepository<Local, Integer>{
     List<Local> findByNombreMenu(String menu);
     
     @Query("SELECT l FROM Local l WHERE l.rangoInferior > ? AND l.rangoSuperior< ?")
-    List<Local> findByRangoInferior(Integer rangoInferior,Integer rangoSuperior);
+    List<Local> findByRangoInferior(Double rangoInferior,Double rangoSuperior);
     
     @Query("SELECT l FROM Local l JOIN FETCH l.rutas r WHERE r.nombreRuta LIKE CONCAT('%',?,'%')  ")
     List<Local> findByRutaPumaBus(String nombreRuta);
+    
+    @Query("SELECT l FROM Local l WHERE SQRT(POWER(l.latitud-?,2)+POWER(l.longitud-?,2))<0.01  ")
+    List<Local> findByPunto(Double latitud,Double longitud);
+
 }

@@ -14,6 +14,7 @@ import mx.unam.ciencias.model.Menu;
 import mx.unam.ciencias.model.RutaPumaBus;
 import mx.unam.ciencias.service.LocalService;
 import org.primefaces.event.map.PointSelectEvent;
+import org.primefaces.model.map.Circle;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -35,13 +36,18 @@ public class LocalController implements Serializable{
 
     /******************Variables usadas en la vista ********************/
     private String terminoBusqueda;
+    
+    private String rutaBusqueda;
+    private Double inferior=20.0;
+    private Double superior=200.0;
+    
     private List<Local> locales;
     private Local local;
     private Menu menu;
     private MapModel simpleModel; // es usado en la vista del ver locales
     private List<RutaPumaBus> rutas;
     
-    
+   
     @PostConstruct
     public void init(){
         
@@ -107,9 +113,38 @@ public class LocalController implements Serializable{
         }
     }
       
-       public void buscarPorNombreRuta(){
-        this.locales=localService.findByRutas(terminoBusqueda);
+    public void buscarPorNombreRuta(){
+        this.locales=localService.findByRutas(rutaBusqueda);
          simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    }
+       
+       
+    public void buscarPorRango(){
+        this.locales=localService.findByPrecios(inferior,superior);
+         simpleModel = new DefaultMapModel(); 
+        for(Local l:this.locales){
+            LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
+            simpleModel.addOverlay(new Marker(coord, l.getNombre()));
+        }
+    } 
+    
+     public void busquedaPunto(PointSelectEvent event){
+        simpleModel = new DefaultMapModel(); 
+        LatLng latlng = event.getLatLng();
+
+        Circle circle = new Circle(latlng, 1000);
+        circle.setStrokeColor("#d93c3c");
+        circle.setFillColor("#d93c3c");
+        circle.setFillOpacity(0.5);
+         
+        simpleModel.addOverlay(circle);
+        
+         this.locales=localService.findByPunto(latlng.getLat(),latlng.getLng());
+       
         for(Local l:this.locales){
             LatLng coord = new LatLng(l.getLatitud(), l.getLongitud()); 
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
@@ -176,6 +211,30 @@ public class LocalController implements Serializable{
 
     public void setRutas(List<RutaPumaBus> rutas) {
         this.rutas = rutas;
+    }
+
+    public Double getInferior() {
+        return inferior;
+    }
+
+    public void setInferior(Double inferior) {
+        this.inferior = inferior;
+    }
+
+    public Double getSuperior() {
+        return superior;
+    }
+
+    public void setSuperior(Double superior) {
+        this.superior = superior;
+    }
+
+    public String getRutaBusqueda() {
+        return rutaBusqueda;
+    }
+
+    public void setRutaBusqueda(String rutaBusqueda) {
+        this.rutaBusqueda = rutaBusqueda;
     }
     
     

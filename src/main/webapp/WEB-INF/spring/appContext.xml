@@ -22,7 +22,7 @@
         <context:component-scan base-package="mx.unam.ciencias.controller" />
 
         <bean id="localController" class="mx.unam.ciencias.controller.LocalController" scope="session">
-            <property name="terminoBusqueda" value="Rata" />
+            <property name="terminoBusqueda" value="Nombre" />
             <property name="local" >
                 <bean class="mx.unam.ciencias.model.Local">
                        <property name="nombre" value="Nombre del local..." />
@@ -40,18 +40,19 @@
 
        <!-- Data Base -->
        <!-- Data Source -->
-       <!--
+       
        <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
             <property name="driverClass" value="org.h2.Driver"/>
             <property name="url" value="jdbc:h2:./test"/>
             <property name="username" value="sa"/>
             <property name="password" value=""/>
         </bean>
-        -->
+     <!--
         <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
             <property name="driverClass" value="org.sqlite.JDBC"/>
             <property name="url" value="jdbc:sqlite:sample.db"/>
         </bean>
+        -->
 	<!-- EntityManager -->
         <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
             <property name="dataSource" ref="dataSource" />
@@ -61,7 +62,8 @@
             <property name="packagesToScan" value="mx.unam.ciencias.model"/> 
             <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">dialect.SQLiteDialect</prop>
+                <!--prop key="hibernate.dialect">dialect.SQLiteDialect</prop-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
                 <prop key="hibernate.max_fetch_depth">3</prop>
                 <prop key="hibernate.jdbc.fetch_size">50</prop>
                 <prop key="hibernate.jdbc.batch_size">10</prop>

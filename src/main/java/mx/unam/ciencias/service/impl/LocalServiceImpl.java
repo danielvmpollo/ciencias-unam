@@ -71,6 +71,15 @@ public class LocalServiceImpl implements LocalService{
         return localRepository.findByRutaPumaBus(nombreRuta);
     }
 
+    @Override
+    public List<Local> findByPrecios(Double inferior,Double superior){
+        return localRepository.findByRangoInferior(inferior, superior);
+    }
+
+    @Override
+    public List<Local> findByPunto(Double lat, Double lon ) {
+        return localRepository.findByPunto(lat, lon);
+    }
 
 
 }

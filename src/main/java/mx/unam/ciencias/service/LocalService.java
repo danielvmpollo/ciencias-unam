@@ -31,4 +31,8 @@ public interface LocalService {
     
     List<Local> findByRutas(String nombreRuta);
     
+    List<Local> findByPrecios(Double inferior,Double superior);
+    
+    List<Local> findByPunto(Double lat,Double lon);
+    
 }
