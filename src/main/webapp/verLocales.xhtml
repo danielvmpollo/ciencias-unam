@@ -78,7 +78,9 @@
                                   
             <p:dataTable  value="#{localController.locales}" 
                           id="locales"
-                          var="_local" >  
+                          var="_local"
+                          style="width: 600px"
+                          >  
                 <p:column headerText="Id" rendered="false">
                     #{_local.id}
                 </p:column>
@@ -122,14 +124,14 @@
                         </ui:repeat>
                     </ul>
                 </p:column> 
-               <p:column>
-                   <p:commandButton ajax="false" value="editar" action="locales" actionListener="#{localController.setLocal(_local)}" />
+                <p:column>
+                   <p:commandButton ajax="false" value="editar" action="altaLocales" actionListener="#{localController.setLocal(_local)}" />
                 </p:column>
-                <p:column width="200">
+                <p:column >
                     <h:graphicImage 
                         value="data:image;base64,#{_local.fotoUrl}"
                                    rendered="#{_local.foto ne null}"     
-                                   height="100"
+                                   height="50"
                                    />
                 </p:column>
             </p:dataTable>
