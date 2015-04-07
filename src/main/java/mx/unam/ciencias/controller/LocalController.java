@@ -13,7 +13,9 @@ import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.model.Menu;
 import mx.unam.ciencias.model.RutaPumaBus;
 import mx.unam.ciencias.service.LocalService;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.map.PointSelectEvent;
+import org.primefaces.model.UploadedFile;
 import org.primefaces.model.map.Circle;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -137,9 +139,9 @@ public class LocalController implements Serializable{
         LatLng latlng = event.getLatLng();
 
         Circle circle = new Circle(latlng, 1000);
-        circle.setStrokeColor("#d93c3c");
-        circle.setFillColor("#d93c3c");
-        circle.setFillOpacity(0.5);
+        circle.setStrokeColor("#00003c");
+        circle.setFillColor("#00003c");
+        circle.setFillOpacity(0.2);
          
         simpleModel.addOverlay(circle);
         
@@ -161,6 +163,11 @@ public class LocalController implements Serializable{
             simpleModel.addOverlay(new Marker(coord, l.getNombre()));
         }
      }
+     
+     public void handleFileUpload(FileUploadEvent event) {
+            UploadedFile file=event.getFile();
+            this.local.setFoto( file.getContents());   
+    }
   
     /***getter y setter
      * @return  **/

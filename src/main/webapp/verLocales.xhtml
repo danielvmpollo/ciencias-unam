@@ -23,6 +23,7 @@
                         disableDoubleClickZoom="true"  
                         model="#{localController.simpleModel}"
                         >
+                     <p:ajax event="pointSelect" listener="#{localController.busquedaPunto}"  update="@form"   />
                 </p:gmap>
             
             <br/>
@@ -121,8 +122,15 @@
                         </ui:repeat>
                     </ul>
                 </p:column> 
-                <p:column>
-                    <p:commandButton action="locales" actionListener="#{localController.setLocal(_local)}" />
+               <p:column>
+                   <p:commandButton ajax="false" value="editar" action="locales" actionListener="#{localController.setLocal(_local)}" />
+                </p:column>
+                <p:column width="200">
+                    <h:graphicImage 
+                        value="data:image;base64,#{_local.fotoUrl}"
+                                   rendered="#{_local.foto ne null}"     
+                                   height="100"
+                                   />
                 </p:column>
             </p:dataTable>
             

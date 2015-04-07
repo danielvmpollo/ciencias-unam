@@ -8,6 +8,7 @@ package mx.unam.ciencias.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +16,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -41,6 +44,11 @@ public class Local implements Serializable{
     @NotNull
     @Column(name = "LATITUD")
     private Double latitud;
+    
+    @Lob
+    @Column(name = "FOTO",columnDefinition = "LONGBLOB")
+    @Basic(fetch=FetchType.LAZY)
+    private byte[] foto;
     
     @NotNull
     @Column(name = "LONGITUD")
@@ -152,8 +160,25 @@ public class Local implements Serializable{
         this.rutas = rutas;
     }
 
-  
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+
+    public String getFotoUrl(){ 
+            if(this!=null && this.getFoto()!=null){
+                BASE64Encoder encoder = new BASE64Encoder();
+                String imageString = encoder.encode(this.getFoto());
+                return   imageString;
+            }
+            else{
+                return null;
+            }
+        }
 
     
-     
 }

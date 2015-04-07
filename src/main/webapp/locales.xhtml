@@ -156,8 +156,28 @@
                     
             </p:dataTable>
         </h:form>
-       
-            
+        <h:form>
+                   <h:outputText  value="Foto local" />
+                   <p:fileUpload 
+                       
+                       fileUploadListener="#{localController.handleFileUpload}" 
+                                          mode="advanced"  
+                                          auto="false"
+                                          value="#{localController.local.foto}"
+                                          sizeLimit="2097152" 
+                                          multiple="false"
+                                          update="foto"
+                                          immediate="true"
+                                          
+                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                   <h:graphicImage 
+                       value="data:image/png;base64,#{localController.local.fotoUrl}"
+                                   rendered="#{localController.local.foto ne null}"
+                                   id="foto"
+                                   height="200"
+                                   />
+                   
+            </h:form>          
         </ui:define>
  
     </ui:composition>
