@@ -24,6 +24,8 @@
             
             <p:message for="nombre"/>
             <p:commandButton  value="Ver valor"  update=":mensaje @form" actionListener="#{saludoController.cambiaNombre()}"  />
+        
+            <p:commandButton  onclick="irUrl('http://google.com')" value="ir a google"/>
         </h:form>
         
         

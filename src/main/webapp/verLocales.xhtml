@@ -14,20 +14,39 @@
            
          <h:form id="form" >
             <h4>Ver local</h4>
-                 <p:gmap id="gmap" 
-                         center="19.3142052,-99.1835216" 
-                         zoom="13" 
-                        type="HYBRID" 
-                        style="width:600px;height:400px"
-                        widgetVar="map"
-                        disableDoubleClickZoom="true"  
-                        model="#{localController.simpleModel}"
-                        >
-                     <p:ajax event="pointSelect" listener="#{localController.busquedaPunto}"  update="@form"   />
-                </p:gmap>
+            
+             <p:toolbar  style="width: 100%;alignment-adjust: auto;float: center ">
+                <f:facet name="left">
+                    <p:inputText value="#{localController.terminoBusqueda}"/>
+                </f:facet>
+               <f:facet name="right">              
+            
+            <p:commandButton ajax="true" update="@form"
+                             value="Buscar por nombre"
+                             actionListener="#{localController.buscarPorNombre()}"
+                             icon="ui-icon-search"
+                             />
+            <p:commandButton ajax="true" update="@form"
+                             value="Buscar por categoria"
+                             actionListener="#{localController.buscarPorCategoria()}"
+                             icon="ui-icon-search"
+                             />
+            
+              <p:commandButton ajax="true" update="@form"
+                             value="Buscar por nombre menu"
+                             actionListener="#{localController.buscarPorNombreMenu()}"
+                             icon="ui-icon-search"
+                             />
+        </f:facet>
+              </p:toolbar>
+                 
             
             <br/>
            
+            
+            <div id="fb-root"></div>
+<div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div>
+            
         <p:separator/>
                    <h:outputText id="rango" value="Rango de precios:" />
                    <p:slider  minValue="20" maxValue="2000" 
@@ -56,85 +75,63 @@
                              actionListener="#{localController.buscarPorNombreRuta()}"/>     
         <p:separator/>
                    
-            <p:inputText value="#{localController.terminoBusqueda}"/>
-           
-                            
-            <p:commandButton ajax="true" update="@form"
-                             value="Buscar por nombre"
-                             actionListener="#{localController.buscarPorNombre()}"
-                             />
-            <p:commandButton ajax="true" update="@form"
-                             value="Buscar por categoria"
-                             actionListener="#{localController.buscarPorCategoria()}"
-                             />
             
-              <p:commandButton ajax="true" update="@form"
-                             value="Buscar por nombre menu"
-                             actionListener="#{localController.buscarPorNombreMenu()}"
-                             />
-              
+           
+           
              
               <p:separator/>              
                                   
-            <p:dataTable  value="#{localController.locales}" 
+            <p:dataScroller  value="#{localController.locales}" 
                           id="locales"
                           var="_local"
                           style="width: 800px"
+                          chunkSize="3"
                           >  
-                <p:column headerText="Id" rendered="false">
+                <p:panelGrid>
                     #{_local.id}
-                </p:column>
-                <p:column headerText="Nombre">
+              
+              
                     #{_local.nombre}
-                </p:column>
-                <p:column headerText="Latitud">
+              
                     #{_local.latitud}
-                </p:column>
-
-                <p:column headerText="Longitud">
+               
                     #{_local.longitud}
-                </p:column>
-                <p:column headerText="Rango Inferior">
+               
                     <p:outputLabel value="#{_local.rangoInferior}" >
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
-                </p:column>
-                <p:column headerText="Rango superior">
+                
                     <p:outputLabel value="#{_local.rangoSuperior}"  >
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
-                </p:column>
-                <p:column rendered="false">
+               
                     <p:commandButton actionListener="#{localController.borraLocal(_local)}"
                                      update="@form"
                                      value="Borrar"
                                      ajax="true"/>
-                </p:column>
-                <p:column>
+                
                     <ul>
                         <ui:repeat value="#{_local.menu}" var="_menu" >
                             <li>#{_menu eq _local.recomendacion?'*':''}#{_menu.nombre} (#{_menu.categoria})</li>
                         </ui:repeat>
                     </ul>
-                </p:column> 
-                <p:column>
+                
                     <ul>
                         <ui:repeat value="#{_local.rutas}" var="_ruta" >
                             <li>#{_ruta.nombreRuta}</li>
                         </ui:repeat>
                     </ul>
-                </p:column> 
-                <p:column>
+                
                    <p:commandButton ajax="false" value="editar" action="altaLocales" actionListener="#{localController.setLocal(_local)}" />
-                </p:column>
-                <p:column >
+               
                     <h:graphicImage 
                         value="data:image;base64,#{_local.fotoUrl}"
                                    rendered="#{_local.foto ne null}"     
                                    height="50"
                                    />
-                </p:column>
-            </p:dataTable>
+                
+                </p:panelGrid>
+            </p:dataScroller>
             
             
             
