@@ -10,6 +10,7 @@ import mx.unam.ciencias.model.Local;
 import mx.unam.ciencias.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,12 @@ public class LocalControllerRest {
     @ResponseBody
     public List<Local> findAll(){
         return  localService.findAll();
+    }
+    
+    @RequestMapping(value = "/nombre/{nombre}", method = RequestMethod.GET) 
+    @ResponseBody
+    public List<Local> findByNombre(@PathVariable String  nombre){
+        return  localService.findByNombre(nombre);
     }
     
 }
