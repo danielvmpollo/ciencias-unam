@@ -19,7 +19,7 @@ public interface LocalRepository extends CrudRepository<Local, Integer>{
      @Override
     List<Local> findAll();
 
-    @Query("SELECT loc FROM Local loc WHERE loc.nombre LIKE CONCAT(?,'%') ")
+    @Query("SELECT loc FROM Local loc WHERE loc.nombre LIKE CONCAT('%',?,'%') ")
     List<Local> findByNombre(String nombre);
     
     @Query("SELECT l FROM Local l WHERE l IN (SELECT m.local FROM Menu m WHERE m.categoria LIKE CONCAT('%',?,'%') ) ")
