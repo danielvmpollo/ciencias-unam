@@ -23,6 +23,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -45,6 +46,7 @@ public class Local implements Serializable{
     @Column(name = "LATITUD")
     private Double latitud;
     
+    @JsonBackReference
     @Lob
     @Column(name = "FOTO",columnDefinition = "LONGBLOB")
     @Basic(fetch=FetchType.LAZY)
@@ -61,11 +63,11 @@ public class Local implements Serializable{
     @NotNull
     @Column(name = "RANGO_SUPERIOR")
     private Double rangoSuperior;
-     
+         
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     private Menu recomendacion;
      
-    
+
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             mappedBy = "local",

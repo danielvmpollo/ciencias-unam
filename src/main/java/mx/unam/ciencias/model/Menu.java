@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
@@ -37,6 +39,7 @@ public class Menu implements Serializable{
        
     private String descripcion;
     
+    @JsonBackReference
     @NotNull
     @ManyToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
     private Local local;
