@@ -15,6 +15,33 @@
          <h:form id="form" >
             <h4>Ver local</h4>
             
+            <table width="100%">
+                <tr>
+                    <td>
+                        <p:commandButton ajax="true" update="@form"
+                             value="Buscar por nombre"
+                             actionListener="#{localController.buscarPorNombre()}"
+                             icon="ui-icon-search"
+                             />
+                    </td>
+                    <td>
+                        <p:commandButton ajax="true" update="@form"
+                             value="Buscar por categoria"
+                             actionListener="#{localController.buscarPorCategoria()}"
+                             icon="ui-icon-search"
+                             />
+                    </td>
+                    <td>
+                        <p:commandButton ajax="true" update="@form"
+                             value="Buscar por nombre menu"
+                             actionListener="#{localController.buscarPorNombreMenu()}"
+                             icon="ui-icon-search"
+                             />
+                    </td>
+                </tr>
+            </table>
+            
+            
              <p:toolbar  style="width: 100%;alignment-adjust: auto;float: center ">
                 <f:facet name="left">
                     <p:inputText value="#{localController.terminoBusqueda}"/>
