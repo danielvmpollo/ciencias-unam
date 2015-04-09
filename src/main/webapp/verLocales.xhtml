@@ -112,47 +112,51 @@
                           style="width: 800px"
                           chunkSize="3"
                           >  
-                <p:panelGrid columns="1">
-                    #{_local.id}
+                <p:panelGrid columns="4">
+                    <f:facet name="header">Local</f:facet>
+                    <p:outputLabel value="ID:"/>
+                    <p:outputLabel value="#{_local.id}" />
+              
+                    <p:outputLabel value="Nombre:"/> 
+                    <p:outputLabel value="#{_local.nombre}" />
+              
+                    <p:outputLabel value="Latitud:" />
+                    <p:outputLabel value="#{_local.latitud}" />
               
               
-                    #{_local.nombre}
-              
-                    #{_local.latitud}
+                    <p:outputLabel value="Longitud:" />
+                    <p:outputLabel value="#{_local.longitud}" />
                
-                    #{_local.longitud}
-               
+                    
+                    <p:outputLabel value="Rango Inferior:" />
                     <p:outputLabel value="#{_local.rangoInferior}" >
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
                 
+                    <p:outputLabel value="Rango Superior:" />
                     <p:outputLabel value="#{_local.rangoSuperior}"  >
                         <f:convertNumber currencySymbol="$" type="currency" locale="en"/>
                     </p:outputLabel>
                
+                    <p:outputLabel value="-" />
                     <p:commandButton actionListener="#{localController.borraLocal(_local)}"
                                      update="@form"
                                      value="Borrar"
                                      ajax="true"/>
+                    
+                <p:outputLabel value="MENU:" />
+                <p:orderList  value="#{_local.menu}" var="_menu" itemLabel="#{_menu.nombre}" itemValue="#{_menu.nombre}" disabled="true"/>
+               
                 
-                    <ul>
-                        <ui:repeat value="#{_local.menu}" var="_menu" >
-                            <li>#{_menu eq _local.recomendacion?'*':''}#{_menu.nombre} (#{_menu.categoria})</li>
-                        </ui:repeat>
-                    </ul>
-                
-                    <ul>
-                        <ui:repeat value="#{_local.rutas}" var="_ruta" >
-                            <li>#{_ruta.nombreRuta}</li>
-                        </ui:repeat>
-                    </ul>
+                <p:outputLabel value="Rutas:" />
+                <p:orderList  value="#{_local.rutas}" var="_ruta" itemLabel="#{_ruta.nombre}" itemValue="#{_ruta.nombre}" disabled="true"/>
                 
                    <p:commandButton ajax="false" value="editar" action="altaLocales" actionListener="#{localController.setLocal(_local)}" />
                
                     <h:graphicImage 
                         value="data:image;base64,#{_local.fotoUrl}"
                                    rendered="#{_local.foto ne null}"     
-                                   height="50"
+                                   height="150"
                                    />
                 
                 </p:panelGrid>
