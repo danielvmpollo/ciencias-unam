@@ -32,7 +32,7 @@ public class LocalControllerRest {
         return  localService.findAll();
     }
     
-    @RequestMapping(value = "/nombre/{nombre}", method = RequestMethod.GET) 
+    @RequestMapping(value = "/nombre={nombre}", method = RequestMethod.GET) 
     @ResponseBody
     public List<Local> findByNombre(@PathVariable String  nombre){
         return  localService.findByNombre(nombre);
