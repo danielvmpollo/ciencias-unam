@@ -129,6 +129,7 @@
                     <p:commandButton actionListener="#{localController.borraLocal(_local)}"
                                      update="@form"
                                      value="Borrar"
+                                     rendered="#{loginController.rol eq 'ROLE_ADMIN'}"
                                      ajax="true"/>
                     
                 <p:outputLabel value="MENU:" />

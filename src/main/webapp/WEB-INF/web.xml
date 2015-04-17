@@ -101,6 +101,16 @@
     </filter-mapping>
     
     
+    <filter>
+        <filter-name>Encoding</filter-name>
+        <filter-class>mx.unam.ciencias.filter.Encoding</filter-class>
+    </filter>
+    
+     <filter-mapping>
+        <filter-name>Encoding</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    
     
        
     <session-config>

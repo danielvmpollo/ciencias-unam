@@ -24,6 +24,8 @@ import org.primefaces.model.map.Marker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.SimpleMailMessage;
 
 /**
  *
@@ -35,6 +37,9 @@ public class LocalController implements Serializable{
     /********************Comunicacion con la capa de servicio*************/
     @Autowired
     private LocalService localService;
+    
+    @Autowired
+    private JavaMailSenderImpl mailSender;
 
     /******************Variables usadas en la vista ********************/
     private String terminoBusqueda;
@@ -80,6 +85,17 @@ public class LocalController implements Serializable{
     /***************************************/
         this.local=new Local();
         this.local.setMenu(new ArrayList<Menu>());//se agrega la lista del menu
+    
+        SimpleMailMessage mail=new SimpleMailMessage();
+        
+        mail.setTo("olivoscesar@gmail.com");
+        mail.setFrom("memo.onilink@gmail.com");
+        mail.setSubject("Local nuevo en la base de datos");
+        mail.setCc("memo.onilink@gmail.com");
+        mail.setText("...");
+        
+        mailSender.send(mail);
+    
     }
     
     public void seleccion(PointSelectEvent event){

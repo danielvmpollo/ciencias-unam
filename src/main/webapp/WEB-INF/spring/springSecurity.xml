@@ -12,14 +12,14 @@
     
         <security:http auto-config="true">
 		<security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-                <security:intercept-url pattern="/verLocales.xhtml" access="ROLE_USER" />
+                <security:intercept-url pattern="/verLocales.xhtml" access="ROLE_ADMIN,ROLE_USER" />
                 <security:access-denied-handler error-page="/index.xhtml?message=Acceso Denegado" />
                 <security:form-login login-page="/index.xhtml"/> 
 	</security:http>
  
 	<security:authentication-manager>
 	  <security:authentication-provider>   
-            <!--security:password-encoder hash="sha-256" /-->     
+            <security:password-encoder hash="sha-256" />     
             <security:jdbc-user-service 
                 data-source-ref="dataSource" 
                 users-by-username-query="SELECT username,password,activo 
