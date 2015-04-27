@@ -88,7 +88,7 @@ public class LocalController implements Serializable{
     
         SimpleMailMessage mail=new SimpleMailMessage();
         
-        mail.setTo("olivoscesar@gmail.com");
+       // mail.setTo("olivoscesar@gmail.com");
         mail.setFrom("memo.onilink@gmail.com");
         mail.setSubject("Local nuevo en la base de datos");
         mail.setCc("memo.onilink@gmail.com");

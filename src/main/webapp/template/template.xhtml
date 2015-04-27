@@ -21,22 +21,27 @@
                 
         <div id="top">
             <ui:insert name="top"> 
-                <h:outputLabel rendered="#{param['message'] ne null}" 
-                               value="#{param['message']}" 
-                               class="ui-messages-error ui-corner-all"   />
-                <h:panelGrid rendered="#{!loginController.loged}">
-                    <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_check" method="POST">
-                        Usuario:<input type="text" name="j_username"/>
-                        Password:<input type="password" name="j_password"/>
-                        <input name="submit" type="submit" value="Login"/>
-                    </form>
-                </h:panelGrid>
-                 <h:panelGrid rendered="#{loginController.loged}">
-                    <h:form>
-                        <p>User:#{loginController.username}(#{loginController.rol})</p>
-                        <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" >Cerrar Session</a>
-                    </h:form>
-                </h:panelGrid>
+                 <h:outputLabel rendered="#{param['message'] ne null}" 
+                                   value="#{param['message']}" 
+                                   class="ui-messages-error ui-corner-all"   />
+                <p:dialog modal="true" widgetVar="login">                  
+                    <h:panelGrid rendered="#{!loginController.loged}">
+                        <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_check" method="POST">
+                            Usuario:<input type="text" name="j_username"/>
+                            Password:<input type="password" name="j_password"/>
+                            <input name="submit" type="submit" value="Login"/>
+                        </form>
+                    </h:panelGrid>              
+                </p:dialog>
+                <h:form>
+                    <p:commandButton ajax="true" value="login" onclick="PF('login').show()" rendered="#{!loginController.loged}" />
+                </h:form>
+                <h:panelGrid rendered="#{loginController.loged}">
+                        <h:form>
+                            <p>User:#{loginController.username}(#{loginController.rol})</p>
+                            <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" >Cerrar Session</a>
+                        </h:form>
+                    </h:panelGrid>
                 
             </ui:insert>
         </div>
