@@ -16,7 +16,7 @@
         
         <br/>
         <br/>
-        <h:form>
+        <h:form id="form">
             ingresa tu nombre:
             <p:inputText value="#{saludoController.nombre}" id="nombre" validatorMessage="Formato no valido">
                 <f:validateRegex for="nombre" pattern="[a-zA-Z0-9]+" />
@@ -41,8 +41,11 @@
         
        <div class="fb-page" data-href="https://www.facebook.com/SopitasNeneYSuMundo" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sopitas.com"><a href="https://www.facebook.com/sopitas.com">Facebook</a></blockquote></div></div>
        <br/>
-         <input value="hola" type="button" onclick="publicaMensaje(jQuery('.ui-inputfield')[0].value)" />
-        </ui:define>
+        <h:form>
+            <p:commandButton ajax="true" value="hola"  onclick="publicaMensaje($('input[id=&quot;form:nombre&quot;]')[0].value+' publicacion desde mi app')" />
+        </h:form>
+      </ui:define>
+
    </ui:composition>
     
    
