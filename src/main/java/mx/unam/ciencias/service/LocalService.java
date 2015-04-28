@@ -35,4 +35,6 @@ public interface LocalService {
     
     List<Local> findByPunto(Double lat,Double lon);
     
+    Local findById(Integer id);
+    
 }

@@ -81,5 +81,10 @@ public class LocalServiceImpl implements LocalService{
         return localRepository.findByPunto(lat, lon);
     }
 
+    @Override
+    public Local findById(Integer id) {
+        return localRepository.findOne(id);
+    }
+
 
 }

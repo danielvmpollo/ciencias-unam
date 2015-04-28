@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">    
+   <ui:composition template="/template/template.xhtml" >
+        <ui:define name="content">
+            <script type="text/javascript" 
+                src="http://maps.googleapis.com/maps/api/js"
+                />
+           
+         <h:form id="form" >
+
+             <p:panelGrid columns="2" rendered="#{param['id_local'] ne null}">
+                 <p:outputLabel value="Nombre"/>
+                 <p:outputLabel value="#{consultaLocalUrl.getLocal(param['id_local']).nombre}"/>
+                 
+                  <p:outputLabel value="Latitud"/>
+                 <p:outputLabel value="#{consultaLocalUrl.getLocal(param['id_local']).latitud}"/>
+                 
+                 
+                 <p:outputLabel value="Longitud"/>
+                 <p:outputLabel value="#{consultaLocalUrl.getLocal(param['id_local']).longitud}"/>
+             </p:panelGrid>
+            
+             
+            
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
